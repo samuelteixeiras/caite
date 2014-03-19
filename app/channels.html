@@ -26,26 +26,42 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="login-modal">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content alert alert-info pre-auth">
+                    This application requires access to your YouTube account.
+                        Please <button  class="btn btn-primary" href="#" class="alert-link" id="login-link">authorize</button> to continue.
+            </div>
+          </div>
+        </div>
+                
+
 
         <div class="container">
             <div class="header">
                 <ul class="nav nav-pills pull-right">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li class="active"><a href="channels.html">Channels</a></li>
-                    <li><a href="#">Contact</a></li>
                 </ul>
                 <h3 class="text-muted">yo</h3>
             </div>
 
             <div class="jumbotron">
-                <h1>'Allo, 'Allo!</h1>
-                <div id="login-container" class="pre-auth">
-                    This application requires access to your YouTube account.
-                    Please <a href="#" id="login-link">authorize</a> to continue.
-                </div>
 
+                <div class="row">
+                    
+                    <div class="col-md-offset-4 col-md-4">
+                        <button  id="playlist-button" type="button" class="btn btn-success btn-lg btn-block" disabled onclick="createPlaylist()">
+                            
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Create Playlist
+                            <span class="badge pull-right badge-on-button" id="badge-on-button">0</span>
+                        </button>
+                    </div>
+                </div>    
+                <br>
                  <div class="row">
-                    <div class="col-md-13" id="channel-html"></div>
+                    <div class="col-md-14" id="channel-html"></div>
                  </div>
 
             </div>
@@ -60,6 +76,7 @@
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
         <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
         <!-- endbower -->
         <!-- endbuild -->
 
@@ -91,7 +108,9 @@
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/main.js"></script>
         <script src="scripts/auth.js"></script>
+        <script src="scripts/channel.js"></script>
         <script src="scripts/subscriptions.js"></script>
+        <script src="scripts/playlist_updates.js"></script>
         <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
         <!-- endbuild -->
 </body>

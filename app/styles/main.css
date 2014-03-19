@@ -20084,3 +20084,49 @@ body {
     border-bottom: 0;
   }
 }
+
+
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 450px; }
+#sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }
+
+.jumbotron .btn#playlist-button{
+  padding: 14px 11px !important;
+}
+
+.badge-on-button{
+  padding: 8px 7px !important;
+  background-color: #4434F3 !important;
+}
+
+.panel-channel {
+  padding: 1px !important;
+}
+
+.video-title{
+  max-height: 2.6em !important;  
+  display: block;
+  overflow: hidden;
+  line-height: 1.3em;
+  white-space: normal;
+  font-size: 13px;
+  margin-top: 5px;
+  background: transparent;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  font-weight: bold;
+}
+
+.panel-footer {
+  padding: 0px 15px;
+}
+
+#remove-icon{
+left: 88px;
+top: 29px;
+}
+
+.col-channel {
+  min-height: 228px;
+}

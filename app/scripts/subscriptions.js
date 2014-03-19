@@ -1,5 +1,5 @@
 
-var channels = new factoryChannel();
+var channels = new FactoryChannel();
 
 /*
   GET https://www.googleapis.com/youtube/v3/videos
@@ -8,31 +8,29 @@ var channels = new factoryChannel();
 */
 
 function videoList(videoId){
+    'use strict';
+    var requestVideo = gapi.client.youtube.videos.list({
+        part:'snippet',
+        id: videoId,
+        maxResults: 1,
+    });
 
-  var requestVideo = gapi.client.youtube.videos.list({
-      part:"snippet",
-      id: videoId,
-      maxResults: 1,
-  });
+    requestVideo.execute(function(response) {
 
-  requestVideo.execute(function(response) {
-
-    // console.log(response.result.items);
-
-    var res   = response.result.items;
-    var thumbnail = res[0].snippet.thumbnails.medium.url;
-    var img = "<img data-thumb='"+  thumbnail +"' src='"+ thumbnail +"' alt='Thumbnail' width='185' data-group-key='thumb-group-0'>";
-    var channelId = res[0].snippet.channelId;
-    var channelTitle  = res[0].snippet.channelTitle;
-
-    var content ="<div class='col-md-3'>" 
-                      +"<a target='_blank' href='https://www.youtube.com/channel/"+ channelId +"'>"
-                      +"<h4 class='media-heading'>"+ channelTitle +"</h4>"
-                      + img 
-                      +"</a>"
-                      +"</div>";
-                      $('#channel-html').append(content);
-  });
+        var res   = response.result.items;
+        var thumbnail = res[0].snippet.thumbnails.medium.url;
+        var videoTitle = res[0].snippet.title;
+        var img = '<img data-thumb="'+  thumbnail +'" src="'+ thumbnail +'" title="'+videoTitle+'" width="175" data-group-key="thumb-group-0">';
+        //var channelId = res[0].snippet.channelId;
+        //var channelTitle  = res[0].snippet.channelTitle;
+        var videoId = res[0].id;
+        var num = parseInt($('#badge-on-button').html());
+        num++;
+        var urlVideo = 'https://www.youtube.com/watch?v='+ videoId ;
+        $('#channel-html > div:nth-child('+num+')').find('a').attr('href',urlVideo).attr('title',videoTitle).html(videoTitle);
+        $('#channel-html > div:nth-child('+num+')').find('img').replaceWith(img);
+        $('#badge-on-button').html(num);
+    });
 
 }
 
@@ -45,22 +43,20 @@ function videoList(videoId){
 
 
 function playlistItems(_uploadsPlaylistId,_maxResults) {
+    'use strict';
+    var maxResults = _maxResults || 1;
 
-  var maxResults = _maxResults || 1;
+    var requestPlaylist = gapi.client.youtube.playlistItems.list({
+        part:'snippet',
+        playlistId: _uploadsPlaylistId,
+        maxResults: maxResults,
+    });
 
-   var requestPlaylist = gapi.client.youtube.playlistItems.list({
-       part:"snippet",
-       playlistId: _uploadsPlaylistId,
-       maxResults: maxResults,
-   });
-
-  requestPlaylist.execute(function(response) {
-    var res   = response.result.items;
-    var videoId = res[0].snippet.resourceId.videoId;
-    videoList(videoId);
-  });
-
-
+    requestPlaylist.execute(function(response) {
+        var res   = response.result.items;
+        var videoId = res[0].snippet.resourceId.videoId;
+        videoList(videoId);
+    });
 }
 
 
@@ -73,26 +69,23 @@ function playlistItems(_uploadsPlaylistId,_maxResults) {
 
 */
 function channelList(_channelId,_playlistItemsMaxResults){
+    'use strict';
+    var requestChannel = gapi.client.youtube.channels.list({
+            part:'contentDetails',
+            maxResults:'1',
+            id:_channelId
+        });
 
-  var requestChannel = gapi.client.youtube.channels.list({
-          part:'contentDetails',
-          maxResults:'1',
-          id:_channelId
-  });
-
-  requestChannel.execute(function(response) {
-
-    var myChannels = response.result;
-    var i = myChannels.items.length;
-    while (i--) {
-         var itemChannel = myChannels.items[i];
-         var uploadsPlaylistId = itemChannel.contentDetails.relatedPlaylists.uploads;
-         channels.addUploadsPlaylistId(itemChannel.id,uploadsPlaylistId);
-         playlistItems(uploadsPlaylistId,_playlistItemsMaxResults);
-    }     
-
-  });        
-
+    requestChannel.execute(function(response) {
+        var myChannels = response.result;
+        var i = myChannels.items.length;
+        while (i--) {
+            var itemChannel = myChannels.items[i];
+            var uploadsPlaylistId = itemChannel.contentDetails.relatedPlaylists.uploads;
+            channels.addUploadsPlaylistId(itemChannel.id,uploadsPlaylistId);
+            playlistItems(uploadsPlaylistId,_playlistItemsMaxResults);
+        }
+    });
 }
 
 /**
@@ -105,33 +98,29 @@ function channelList(_channelId,_playlistItemsMaxResults){
 */
 
 function subscriptionsList(_maxChannelsResults,_order,_maxVideosByChannelResults){
-  
+    'use strict';
 
-  var requestList = gapi.client.youtube.subscriptions.list({
-    part:'id,snippet,contentDetails',
-    maxResults: _maxChannelsResults,
-    order: _order,
-    mine:'true'
-  });
+    var requestList = gapi.client.youtube.subscriptions.list({
+        part:'id,snippet,contentDetails',
+        maxResults: _maxChannelsResults,
+        order: _order,
+        mine:'true'
+    });
 
 
-   requestList.execute(function(response) {
+    requestList.execute(function(response) {
+        var res = response.result;
+        var i = res.items.length;
+        while (i--) {
+            $('#channel-html').append(videoElement);
+            var t = res.items[i];
+            var channelYouTube = new Channel(t.snippet.resourceId.channelId , t.snippet.title , t.snippet.thumbnails.default.url);
 
-    var res = response.result;
-    var i = res.items.length;
-    while (i--) {
-        t = res.items[i];
-        var channelYouTube = new Channel(t.snippet.resourceId.channelId , t.snippet.title , t.snippet.thumbnails.default.url);
-
-        channels.addChannel(channelYouTube);
-        channelList(channelYouTube.channelId,_maxVideosByChannelResults);
-    };
-     // console.log(channels);
-   });
+            channels.addChannel(channelYouTube);
+            channelList(channelYouTube.channelId,_maxVideosByChannelResults);
+        }
+    });
 
 }
 
 
-function handleAPILoaded(){
-    subscriptionsList(16, "alphabetical");
-}
