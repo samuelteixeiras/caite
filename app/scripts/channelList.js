@@ -25,9 +25,6 @@ function channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannel
 
     requestList.execute(function(response) {
         var res = response.result;
-        console.log(res);
-
-        console.log(response);
         for (var i =0 ; i < res.items.length ; i++) {
 
             var t = res.items[i];
@@ -48,8 +45,10 @@ function channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannel
 
         }
 
-        if (res.nextPageToken !== null ){
+        if (res.nextPageToken != null ){
             channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannelResults,res.nextPageToken);
+        }else{
+          console.log(channels.getChannels());
         }
 
     });
