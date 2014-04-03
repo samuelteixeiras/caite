@@ -12,7 +12,7 @@ var channels = new FactoryChannel();
 function channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannelResults,_pageToken){
     'use strict';
 
-    var pageToken = _pageToken || "";
+    var pageToken = _pageToken || '';
     var requestList = gapi.client.youtube.subscriptions.list({
         part:'id,snippet,contentDetails',
         maxResults: _maxChannelsResults,
@@ -48,103 +48,12 @@ function channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannel
 
         }
 
-        if (res.nextPageToken != null ){
-          channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannelResults,res.nextPageToken);
+        if (res.nextPageToken !== null ){
+            channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannelResults,res.nextPageToken);
         }
 
     });
 
-}
-
-
-/*
-  Add uploadsPlaylistId to channelList
-  GET https://developers.google.com/youtube/v3/docs/channels
-  action list
-  @param channelId
-
-
-*/
-function channelPageList(_channelId,_playlistItemsMaxResults){
-    'use strict';
-    var requestChannel = gapi.client.youtube.channels.list({
-            part:'contentDetails,snippet',
-            maxResults:'1',
-            id:_channelId
-        });
-
-    requestChannel.execute(function(response) {
-
-        var myChannels = response.result;
-        var i = myChannels.items.length;
-        while (i--) {
-            var itemChannel = myChannels.items[i];
-
-            var thumbnail = itemChannel.snippet.thumbnails.medium.url;
-            var videoTitle = itemChannel.snippet.title;
-            var title  = itemChannel.snippet.title;
-            var img = '<img data-thumb="'+  thumbnail +'" src="'+ thumbnail +'" title="'+videoTitle+'" width="175" data-group-key="thumb-group-0">';
-
-
-            var uploadsPlaylistId = itemChannel.contentDetails.relatedPlaylists.uploads;
-
-            var num = parseInt($('#badge-on-button').html());
-            num++;
-
-            var urlChannel = 'https://www.youtube.com/channel/'+ itemChannel.id ;
-            $('#channel-html > div:nth-child('+num+')').find('a').attr('href',urlChannel).attr('title',title).html(title);
-            $('#channel-html > div:nth-child('+num+')').find('img').replaceWith(img);
-            $('#badge-on-button').html(num);
-        }
-    });
-}
-
-
-/*
-  Add uploadsPlaylistId to channelList
-  GET https://developers.google.com/youtube/v3/docs/channels
-  action list
-  @param channelId
-
-
-*/
-function channelListByOrder(_channelIds){
-    'use strict';
-
-    var _channelId = _channelIds.pop().channelId;
-    var requestChannel = gapi.client.youtube.channels.list({
-            part:'contentDetails,snippet',
-            maxResults:'1',
-            id:_channelId
-        });
-
-    requestChannel.execute(function(response) {
-
-        var myChannels = response.result;
-        var i = myChannels.items.length;
-        while (i--) {
-            var itemChannel = myChannels.items[i];
-
-            var thumbnail = itemChannel.snippet.thumbnails.medium.url;
-            var videoTitle = itemChannel.snippet.title;
-            var title  = itemChannel.snippet.title;
-            var img = '<img data-thumb="'+  thumbnail +'" src="'+ thumbnail +'" title="'+videoTitle+'" width="175" data-group-key="thumb-group-0">';
-
-
-            var uploadsPlaylistId = itemChannel.contentDetails.relatedPlaylists.uploads;
-
-            var num = parseInt($('#badge-on-button').html());
-            num++;
-
-            var urlChannel = 'https://www.youtube.com/channel/'+ itemChannel.id ;
-            $('#channel-html > div:nth-child('+num+')').find('a').attr('href',urlChannel).attr('title',title).html(title);
-            $('#channel-html > div:nth-child('+num+')').find('img').replaceWith(img);
-            $('#badge-on-button').html(num);
-        }
-
-        if(_channelIds.length>0)
-            channelListByOrder(_channelIds)
-    });
 }
 
 
