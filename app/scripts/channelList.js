@@ -1,5 +1,25 @@
 var channels = new FactoryChannel();
 
+
+
+function videoElement(_urlChannel,_title,_img){
+      'use strict';
+
+      var videoElement =  '<div class="col-md-3 col-channel">'
+                            +'<span class="glyphicon glyphicon-remove" id="remove-icon"></span>'
+                            +'<div class="panel panel-primary">'
+                              +'<div class="panel-body panel-channel">'
+                                + _img
+                              +'</div>'
+                              +'<div class="panel-footer panel-primary">'
+                                   +'<a class="video-title" href="'+ _urlChannel +'">'+ _title +'</a>'
+                              +'</div>'
+                            +'</div>'
+                          +'</div>';
+      return videoElement;
+
+}
+
 /**
   GET https://www.googleapis.com/youtube/v3/subscriptions
   action list
@@ -46,8 +66,6 @@ function channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannel
 
         if (res.nextPageToken != null ){
             channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannelResults,res.nextPageToken);
-        }else{
-          console.log(channels.getChannels());
         }
 
     });
@@ -55,20 +73,4 @@ function channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannel
 }
 
 
-function videoElement(_urlChannel,_title,_img){
 
-
-      var videoElement =  '<div class="col-md-3 col-channel">'
-                            +'<span class="glyphicon glyphicon-remove" id="remove-icon"></span>'
-                            +'<div class="panel panel-primary">'
-                              +'<div class="panel-body panel-channel">'
-                                + _img
-                              +'</div>'
-                              +'<div class="panel-footer panel-primary">'
-                                   +'<a class="video-title" href="'+ _urlChannel +'">'+ _title +'</a>'
-                              +'</div>'
-                            +'</div>'
-                          +'</div>';
-    return videoElement;
-
-}

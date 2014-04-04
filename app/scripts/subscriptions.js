@@ -65,8 +65,8 @@ function playlistItems(_uploadsPlaylistId,_maxResults) {
   Add uploadsPlaylistId to channelList
   GET https://developers.google.com/youtube/v3/docs/channels
   action list
-  @param channelId  
-  
+  @param channelId
+
 
 */
 function channelList(_channelId,_playlistItemsMaxResults){
@@ -98,14 +98,16 @@ function channelList(_channelId,_playlistItemsMaxResults){
   @return channels ( channelId, title ,thumbnail )
 */
 
-function subscriptionsList(_maxChannelsResults,_order,_maxVideosByChannelResults){
+function subscriptionsList(_maxChannelsResults,_order,_maxVideosByChannelResults,_pageToken){
     'use strict';
 
+    var pageToken = _pageToken || '';
     var requestList = gapi.client.youtube.subscriptions.list({
         part:'id,snippet,contentDetails',
         maxResults: _maxChannelsResults,
         order: _order,
-        mine:'true'
+        mine:'true',
+        pageToken: pageToken
     });
 
 
@@ -119,6 +121,10 @@ function subscriptionsList(_maxChannelsResults,_order,_maxVideosByChannelResults
 
             channels.addChannel(channelYouTube);
             channelList(channelYouTube.channelId,_maxVideosByChannelResults);
+        }
+
+        if (res.nextPageToken != null ){
+            subscriptionsList(_maxChannelsResults,_order,_maxVideosByChannelResults,res.nextPageToken);
         }
     });
 
