@@ -21,6 +21,12 @@ $(function() {
 
     $( '#channel-html' ).sortable();
     $( '#channel-html' ).disableSelection();
+
+    $('body').on('click','.glyphicon.glyphicon-remove',function(){
+      $(this).parent().remove();
+    });
+
+    
   });
 
 
@@ -29,4 +35,6 @@ function handleAPILoaded(){
     subscriptionsList(16, 'alphabetical');
     enableForm();
 }
+
+
 

@@ -27,6 +27,7 @@ function videoList(videoId){
         var num = parseInt($('#badge-on-button').html());
         num++;
         var urlVideo = 'https://www.youtube.com/watch?v='+ videoId ;
+        $('#channel-html > div:nth-child('+num+')').find('span').attr('videoId',videoId);
         $('#channel-html > div:nth-child('+num+')').find('a').attr('href',urlVideo).attr('title',videoTitle).html(videoTitle);
         $('#channel-html > div:nth-child('+num+')').find('img').replaceWith(img);
         $('#badge-on-button').html(num);

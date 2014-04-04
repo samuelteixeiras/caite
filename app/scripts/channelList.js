@@ -30,11 +30,10 @@ function channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannel
             var t = res.items[i];
             var channelYouTube = new Channel(t.snippet.resourceId.channelId , t.snippet.title , t.snippet.thumbnails.default.url);
             channels.addChannel(channelYouTube);
-
-            var thumbnail = t.snippet.thumbnails.default.url;
+            var thumbnail = t.snippet.thumbnails.high.url;
             var channelTitle = t.snippet.title;
             var title  = t.snippet.title;
-            var img = '<img data-thumb="'+  thumbnail +'" src="'+ thumbnail +'" title="'+channelTitle+'" width="175" data-group-key="thumb-group-0">';
+            var img = '<img data-thumb="'+  thumbnail +'" src="'+ thumbnail +'" title="'+channelTitle+'" width="88"  height="88" data-group-key="thumb-group-0">';
 
             var num = parseInt($('#badge-on-button').html());
             num++;
