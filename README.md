@@ -11,6 +11,7 @@
 
 # TODO 
 1. Manager youtube playlist 
+2. Calculate time spent in youtube videos based on history
 
 
 # Links

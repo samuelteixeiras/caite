@@ -42,46 +42,15 @@
                 <ul class="nav nav-pills pull-right">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="channels.html">Channels</a></li>
-                    <li class="active"><a href="playlists.html">Playlists</a></li>
-                    <li><a href="history.html">History</a></li>
+                    <li><a href="playlists.html">Playlists</a></li>
+                    <li class="active"><a href="history.html">History</a></li>
                 </ul>
                 <h3 class="text-muted"><img src="images/caite.png" width="150"></h3>
             </div>
 
             <div class="jumbotron">
-               
                  <div class="row">
-                    <div class="panel panel-default">
-                      <div class="panel-heading"><span class="badge  badge-on-button" id="badge-on-button">0</span>  Playlists   </div>
-                      <br>
-                        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-                        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                            <button class="btn btn-success button-especial green">
-                                <i class="glyphicon glyphicon-ok"></i>
-                            </button>
-
-                            <button class="btn btn-warning button-especial yellow">
-                                <i class="glyphicon glyphicon-minus"></i>
-                            </button>
-
-                            <button class="btn btn-danger button-especial red">
-                                <i class="glyphicon glyphicon-remove"></i>
-                            </button>
-                        </div>
-
-                        
-                    </div>
-
-                      <div class="panel-body">
-                        <ul class="list-group pull-center" id="listGroup">
-                          
-                        </ul>
-                      </div>
-                    </div>
-                        
-                        
-
-
+                    <div class="col-md-14" id="channel-html"></div>
                  </div>
 
             </div>
@@ -124,13 +93,11 @@
 
         function handleAPILoaded(){
             'use strict';
-            listPlaylists(50);
+            myChannel();
         }
         </script>
         <script src="scripts/auth.js"></script>
-        <script src="scripts/channel.js"></script>
-        <script src="scripts/playlists.js"></script>
-
+        <script src="scripts/history.js"></script>
         <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
         <!-- endbuild -->
 </body>

@@ -20,12 +20,14 @@ function videoElement(_urlChannel,_title,_img){
 
 }
 
+
 /**
   GET https://www.googleapis.com/youtube/v3/subscriptions
   action list
   @param _maxChannelsResults  # Acceptable values are 0 to 50, inclusive. The default value is 5.
   @param _order # alphabetical, relevance , unread
   @param _maxVideosByChannelResults  # Acceptable values are 0 to 50, inclusive. The default value is 1.
+  @param _pageToken # get the next page
   @return channels ( channelId, title ,thumbnail )
 */
 
