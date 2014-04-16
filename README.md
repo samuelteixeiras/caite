@@ -2,7 +2,7 @@
 ============================================================
 #### For create your own way to show youtube videos and watch them easily!
 
-![](https://raw.github.com/samuelteixeiras/caite/master/app/images/home.png)
+![](http://i.imgur.com/glw36W6.gif)
 
 # How
 1. Using youtube javascript date api v3
