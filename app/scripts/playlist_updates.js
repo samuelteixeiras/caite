@@ -33,6 +33,8 @@ function createPlaylist(_element,_privacyStatus) {
         if (result) {
             playlistId  = result.id;
             var videoIds= getVideosIds(_element);
+            localStorage.setItem("totalVideosAdd", videoIds.length);
+            showProgressBar();
             addVideosToPlaylist(videoIds,0,playlistId);
 
         } else {
@@ -51,20 +53,19 @@ function addVideoToPlaylistByVideoId(_videoId,_playListId) {
 
 function getVideosIds(_element){
 
-    var videoIds=new Array();  
+    var videoIds=new Array();
 
     $(_element).find("span").each(function(){
         videoIds.push($( this ).attr("videoId"));
-        console.log($( this ).attr("videoId"));
     });
     return videoIds;
 }
 
 /*
   POST https://www.googleapis.com/youtube/v3/playlistItems
-  Add a video to a playlist. 
+  Add a video to a playlist.
   @param videoId
-  @param position #started by 0 for the first video in playlist , default 0 
+  @param position #started by 0 for the first video in playlist , default 0
 */
 
 function addVideosToPlaylist(_videoIds, _position,_playListId) {
@@ -87,6 +88,7 @@ function addVideosToPlaylist(_videoIds, _position,_playListId) {
         }
     });
     request.execute(function(response) {
+        updateProgressBar("progress-bar",localStorage.getItem("totalVideosAdd"),localStorage.getItem("totalVideosAdd") - _videoIds.length);
         if(_videoIds.length > 0 ){
             addVideosToPlaylist(_videoIds, _position+1,_playListId);
         }else{
@@ -101,9 +103,9 @@ function addVideosToPlaylist(_videoIds, _position,_playListId) {
 
 /*
   POST https://www.googleapis.com/youtube/v3/playlistItems
-  Add a video to a playlist. 
+  Add a video to a playlist.
   @param videoId
-  @param position #started by 0 for the first video in playlist , default 0 
+  @param position #started by 0 for the first video in playlist , default 0
 */
 
 function addToPlaylist(_id, _position,_playListId) {

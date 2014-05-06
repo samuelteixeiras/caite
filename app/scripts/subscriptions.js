@@ -31,6 +31,8 @@ function videoList(videoId){
         $('#channel-html > div:nth-child('+num+')').find('a').attr('href',urlVideo).attr('title',videoTitle).html(videoTitle);
         $('#channel-html > div:nth-child('+num+')').find('img').replaceWith(img);
         $('#badge-on-button').html(num);
+
+        updateProgressBar("progress-bar",localStorage.getItem("totalChannels"),num);
     });
 
 }
@@ -80,6 +82,7 @@ function channelList(_channelId,_playlistItemsMaxResults){
     requestChannel.execute(function(response) {
         var myChannels = response.result;
         var i = myChannels.items.length;
+
         while (i--) {
             var itemChannel = myChannels.items[i];
             var uploadsPlaylistId = itemChannel.contentDetails.relatedPlaylists.uploads;
@@ -110,10 +113,10 @@ function subscriptionsList(_maxChannelsResults,_order,_maxVideosByChannelResults
         pageToken: pageToken
     });
 
-
     requestList.execute(function(response) {
         var res = response.result;
         var i = res.items.length;
+        localStorage.setItem("totalChannels", parseInt(i)+parseInt(localStorage.getItem("totalChannels")));
         while (i--) {
             $('#channel-html').append(videoElement);
             var t = res.items[i];

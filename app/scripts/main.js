@@ -7,7 +7,7 @@ var videoElement =  '<div class="col-md-3 col-channel">'
                                 +'<img alt="" src="http://placehold.it/175x98" />'
                               +'</div>'
                               +'<div class="panel-footer panel-primary">'
-                                   +'<a class="video-title"></a>'  
+                                   +'<a class="video-title"></a>'
                               +'</div>'
                             +'</div>'
                       +'</div>';
@@ -26,12 +26,13 @@ $(function() {
       $(this).parent().remove();
     });
 
-    
+
   });
 
 
 function handleAPILoaded(){
     'use strict';
+    localStorage.setItem("totalChannels", 0);
     subscriptionsList(16, 'alphabetical');
     enableForm();
 }

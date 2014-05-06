@@ -49,37 +49,37 @@
             </div>
 
             <div class="jumbotron">
-               
+
                  <div class="row">
                     <div class="panel panel-default">
                       <div class="panel-heading"><span class="badge  badge-on-button" id="badge-on-button">0</span>  Playlists   </div>
                       <br>
                         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
                         <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                            <button class="btn btn-success button-especial green">
+                            <button class="btn btn-success green" id="green">
                                 <i class="glyphicon glyphicon-ok"></i>
                             </button>
 
-                            <button class="btn btn-warning button-especial yellow">
+                            <button class="btn btn-warning yellow" id="yellow">
                                 <i class="glyphicon glyphicon-minus"></i>
                             </button>
 
-                            <button class="btn btn-danger button-especial red">
+                            <button class="btn btn-danger red" id="red">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </button>
                         </div>
 
-                        
+
                     </div>
 
                       <div class="panel-body">
                         <ul class="list-group pull-center" id="listGroup">
-                          
+
                         </ul>
                       </div>
                     </div>
-                        
-                        
+
+
 
 
                  </div>
@@ -124,6 +124,28 @@
 
         function handleAPILoaded(){
             'use strict';
+
+            $("#green").on("click",function(){
+              $(":checkbox").prop("checked", true);
+            });
+
+            $("#yellow").on("click",function(){
+              $(":checkbox").prop("checked", false);
+            });
+
+
+            $("#red").on("click",function(){
+
+               var r = confirm("Are you wish delete this playlist?");
+               if (r == true) {
+                   $(":checked").each(function(){
+                   var id = $(this).attr("playlistid");
+                   deletePlaylist(id);
+                   $(this).parent().remove();
+                   });
+               }
+            });
+
             listPlaylists(50);
         }
         </script>
