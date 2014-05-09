@@ -1,0 +1,122 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Caite</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css styles/vendor.css -->
+        <!-- bower:css -->
+
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="login-modal">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content alert alert-info pre-auth">
+                    This application requires access to your YouTube account.
+                        Please <button  class="btn btn-primary" href="#" class="alert-link" id="login-link">authorize</button> to continue.
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+            <div class="header">
+                <ul class="nav nav-pills pull-right">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="channels.html">Channels</a></li>
+                    <li><a href="playlists.html">Playlists</a></li>
+                    <li><a href="history.html">History</a></li>
+                </ul>
+                <h3 class="text-muted"><img src="images/caite.png" width="150"></h3>
+            </div>
+
+            <div class="jumbotron">
+
+                <div class="row">
+
+                    <div class="col-md-offset-4 col-md-4">
+                        <button  id="playlist-button" type="button" class="btn btn-success btn-lg btn-block" disabled onclick="createPlaylist('#channel-html','public')">
+
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Create Playlist
+                            <span class="badge pull-right badge-on-button" id="badge-on-button">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="progress progress-striped active">
+                  <div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    <span class="sr-only">0% Complete</span>
+                  </div>
+
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col-md-14" id="channel-html"></div>
+                </div>
+
+            </div>
+
+            <div class="footer">
+                <iframe src="http://ghbtns.com/github-btn.html?user=samuelteixeiras&repo=caite&type=follow"
+  allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+
+            </div>
+        </div>
+
+
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/jquery/jquery.js"></script>
+        <script src="bower_components/jquery-ui/ui/jquery-ui.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+
+
+        <!-- build:js scripts/plugins.js -->
+        <script src="bower_components/sass-bootstrap/js/affix.js"></script>
+        <script src="bower_components/sass-bootstrap/js/alert.js"></script>
+        <script src="bower_components/sass-bootstrap/js/dropdown.js"></script>
+        <script src="bower_components/sass-bootstrap/js/tooltip.js"></script>
+        <script src="bower_components/sass-bootstrap/js/modal.js"></script>
+        <script src="bower_components/sass-bootstrap/js/transition.js"></script>
+        <script src="bower_components/sass-bootstrap/js/button.js"></script>
+        <script src="bower_components/sass-bootstrap/js/popover.js"></script>
+        <script src="bower_components/sass-bootstrap/js/carousel.js"></script>
+        <script src="bower_components/sass-bootstrap/js/scrollspy.js"></script>
+        <script src="bower_components/sass-bootstrap/js/collapse.js"></script>
+        <script src="bower_components/sass-bootstrap/js/tab.js"></script>
+        <!-- endbuild -->
+
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <script src="scripts/auth.js"></script>
+        <script src="scripts/helper.js"></script>
+        <script src="scripts/channel.js"></script>
+        <script src="scripts/subscriptions.js"></script>
+        <script src="scripts/playlist_updates.js"></script>
+        <script src="https://apis.google.com/js/client.js?onload=googleApiClientReady"></script>
+        <!-- endbuild -->
+
+        <a href="https://github.com/samuelteixeiras/caite"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
+
+</body>
+</html>
