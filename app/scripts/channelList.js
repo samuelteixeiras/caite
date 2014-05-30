@@ -50,6 +50,7 @@ function channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannel
         for (var i =0 ; i < res.items.length ; i++) {
 
             var t = res.items[i];
+            console.log(t);
             var channelYouTube = new Channel(t.snippet.resourceId.channelId , t.snippet.title , t.snippet.thumbnails.default.url);
             channels.addChannel(channelYouTube);
             var thumbnail = t.snippet.thumbnails.high.url;
@@ -60,7 +61,7 @@ function channelSubscriptionsList(_maxChannelsResults,_order,_maxVideosByChannel
             var num = parseInt($('#badge-on-button').html());
             num++;
 
-            var urlChannel = 'https://www.youtube.com/channel/'+ t.id ;
+            var urlChannel = 'https://www.youtube.com/channel/'+ t.snippet.resourceId.channelId ;
             $('#channel-html').append(videoElement(urlChannel,title,img));
             $('#badge-on-button').html(num);
 
