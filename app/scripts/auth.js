@@ -9,7 +9,7 @@ var OAUTH2_SCOPES = ['https://www.googleapis.com/auth/youtube'];
 // Handle the result of a gapi.auth.authorize() call.
 function handleAuthResult(authResult) {
     'use strict';
-    if (authResult) {
+    if (authResult.status.google_logged_in == "true") {
         // Authorization was successful. Hide authorization prompts and show
         // content that should be visible after authorization succeeds.
         $('.pre-auth').hide();
