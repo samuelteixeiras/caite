@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/samuelteixeiras/caite.svg?branch=master)](https://travis-ci.org/samuelteixeiras/caite)
+
 ![](https://raw.github.com/samuelteixeiras/caite/master/app/images/caite.png)
 ============================================================
 #### For create your own way to show youtube videos and watch them easily!
